@@ -1,101 +1,109 @@
 //Arrays created for information to create random characters//
-var numbers = "0123456789"
-var special = "!#$%&'()*+,-./:;<=>?@][/^_`{|}~"
-var lowercase = "abcdefghijklmnopqrstuvwxyz"
-var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-var answers = ""
-var passwordOption = ""
-var passwordLength = "";
+var numbers = "0123456789";
+var special = "!#$%&'()*+,-./:;<=>?@][/^_`{|}~";
+var lowercase = "abcdefghijklmnopqrstuvwxyz";
+var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var answers = "";
+var passwordOption = "";
+var combinedPw = "";
 var confirmSpecial = "";
 var confirmNumbers = "";
 var confirmUppercase = "";
 var confirmLowerase = "";
+var password = "";
+var passwordText = document.getElementById("password");
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 generateBtn.addEventListener("click", start);
 function start() {
-    var ps = writePassword();
-    document.getElementById("Password").placeholder = ps;
+  reset();
+  password = "";
+  passwordText.value = password;
+  writePassword();
+  createPW();
 }
 //generate inpuput for password.
 function writePassword() {
-    //Get user input-details for password- First confirm number of characters.
-    answers = parseInt(prompt("How many characters would you like your password to be? Choose between 8-128"));
-    if (!enter) {
-        alert("Error! Cannot be empty Pick a password lenght between 8 and 128!");
-    }
-    else if (parseInt(parameter >= 8 && parameter <= 128)) {
-        alert("Your password will have ${passwordLenght} characters");
-    }
- else {
-        var confirmNumbers = (confirm("Would you like any numbers"));
-        var confirmSpecial = (confirm("Would you like any special characters?"));
-        var confirmLowercase = (confirm("Any lowercase letters?"));
-        var confirmUppercase = (confirm("Any uppercase letters?"));
-    }
-}
-if (!confrimNumbers && !confrimSpecial && !confirmLowercase && !confirmUppercase) {
+  //Get user input-details for password- First confirm number of characters.
+  answers = parseInt(prompt("How many characters would you like your password to be? Choose between 8-128"));
+  if (answers == false) {
+    alert("Error! Cannot be empty Pick a password lenght between 8 and 128!");
+  }
+  else if (answers >= 8 && answers <= 128) {
+    alert("Your password will have " + answers + " characters");
+    confirmNumbers = confirm("Would you like any numbers");
+    confirmSpecial = confirm("Would you like any special characters?");
+    confirmLowercase = confirm("Any lowercase letters?");
+    confirmUppercase = confirm("Any uppercase letters?");
+  }
+  if (confirmNumbers == false && confirmSpecial == false && confirmLowercase == false && confirmUppercase == false) {
     passwordOption = alert("Must have at least one");
-}
-else if (confirmNumber && confirmSpecial && confirmLowercase && confirmUppercase) {
-    //concat- merges two arrags
+  }
+  else if (confirmNumbers == true && confirmSpecial == true && confirmLowercase == true && confirmUppercase == true) {
+    //concat- merges two arrays
     passwordOption = numbers.concat(special, lowercase, uppercase);
-}
-// Else if statements for confirm statements.
-else if (confirmNumber && confirmUppercase && confirmLowercase) {
+  }
+  // Else if statements for confirm statements.
+  else if (confirmNumbers && confirmUppercase && confirmLowercase) {
     passwordOption = number.concat(uppercase, lowercase);
-}
-else if (confirmSpecial && confirmNumber && confirmLowercase) {
+  }
+  else if (confirmSpecial && confirmNumbers && confirmLowercase) {
     passwordOption = special.concat(number, lowercase);
-}
-else if (confirmSpecial && confirmLowercase && confirmUppercase) {
+  }
+  else if (confirmSpecial && confirmLowercase && confirmUppercase) {
     passwordOption = special.concat(lowercase, uppercase);
-}
-else if (confirmNumber && confirmLowercase && confirmUppercase) {
+  }
+  else if (confirmNumbers && confirmLowercase && confirmUppercase) {
     passwordOption = number.concat(lowercase, uppercase);
-}
-//
-else if (confirmSpecial && confirmNumber) {
+  }
+  //
+  else if (confirmSpecial && confirmNumbers) {
     passwordOption = special.concat(number);
-} else if (confirmSpecial && confirmLowercase) {
+  } else if (confirmSpecial && confirmLowercase) {
     passwordOption = special.concat(lowercase);
-} else if (confirmSpecial && confirmUppercase) {
+  } else if (confirmSpecial && confirmUppercase) {
     passwordOption = special.concat(uppercase);
-}
-else if (confirmLowercase && confirmNumber) {
+  }
+  else if (confirmLowercase && confirmNumbers) {
     passwordOption = lowercase.concat(number);
-} else if (confirmLowercase && confirmUppercase) {
+  } else if (confirmLowercase && confirmUppercase) {
     passwordOption = lowercase.concat(Uppercase);
-} else if (confirmNumber && confirmUppercase) {
+  } else if (confirmNumbers && confirmUppercase) {
     passwordOption = number.concat(uppercase);
-}
-// Else if for single choice password
-else if (confirmSpecial) {
+  }
+  // Else if for single choice password
+  else if (confirmSpecial) {
     passwordOption = special;
-}
-else if (confirmNumber) {
+  }
+  else if (confirmNumbers) {
     passwordOption = number;
-}
-else if (confirmLowercase) {
+  }
+  else if (confirmLowercase) {
     passwordOption = lowercase;
-}
-else if (confirmUppercase) {
+  }
+  else if (confirmUppercase) {
     passwordOption = (uppercase);
-};
+  };
+}
 // password variable is an array placeholder for user generated amount of length
-var password = [];
-// Start random selection variables:
-// Random selection for all variables:
-for (var i = 0; i < enter; i++) {
-    var answers = passwordOption[Math.floor(Math.random() * passwordOption.length)];
-    password.push(answers);
+function createPW() {
+  // Start random selection variables:
+  // Random selection for all variables:
+  // This also combines the password characters after picking from the chosen string
+  for (var i = 0; i < answers; i++) {
+    combinedPW = passwordOption[Math.floor(Math.random() * passwordOption.length)];
+    password = password + combinedPW;
+  }
+  passwordText.value = password;
 }
-// This joins the password array and converts it to a string
-var ps = password.join("");
-UserInput(ps);
-function UserInput(ps) {
-    document.getElementById("password").textContent = ps;
+//added reset function
+function reset() {
+  var answers = "";
+  var passwordOption = "";
+  var combinedPw = "";
+  var confirmSpecial = "";
+  var confirmNumbers = "";
+  var confirmUppercase = "";
+  var confirmLowerase = "";
+  var password = "";
 }
-// var password = generatePassword();
-var passwordText = document.querySelector("#password");
-passwordText.value = password;
